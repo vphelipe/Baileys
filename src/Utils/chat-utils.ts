@@ -9,6 +9,8 @@ import { toNumber } from './generics'
 import { LT_HASH_ANTI_TAMPERING } from './lt-hash'
 import { downloadContentFromMessage, } from './messages-media'
 
+export type ChatMutationMap = { [index: string]: ChatMutation }
+
 type FetchAppStateSyncKey = (keyId: string) => Promise<proto.Message.IAppStateSyncKeyData> | proto.Message.IAppStateSyncKeyData
 
 const mutationKeys = (keydata: Uint8Array) => {
