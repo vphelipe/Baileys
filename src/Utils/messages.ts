@@ -576,6 +576,7 @@ export const normalizeMessageContent = (content: WAMessageContent | null | undef
 	content = content?.ephemeralMessage?.message?.viewOnceMessage?.message ||
 				content?.ephemeralMessage?.message ||
 				content?.viewOnceMessage?.message ||
+				content?.documentWithCaptionMessage?.message ||
 				content ||
 				undefined
 	return content
@@ -596,7 +597,12 @@ export const extractMessageContent = (content: WAMessageContent | undefined | nu
 		} else if(msg.locationMessage) {
 			return { locationMessage: msg.locationMessage }
 		} else {
-			return { conversation: 'contentText' in msg ? msg.contentText : ('hydratedContentText' in msg ? msg.hydratedContentText : '') }
+			return {
+				conversation:
+					'contentText' in msg
+						? msg.contentText
+						: ('hydratedContentText' in msg ? msg.hydratedContentText : '')
+			}
 		}
 	}
 
