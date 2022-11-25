@@ -9,6 +9,40 @@
  
 GRUP INFO BAILEYS: [KLIK DISINI](https://chat.whatsapp.com/LF2GXyxYnCgEEbmHA3KmQo)
 
+## Button, Template & List ga work?
+silahkan tambahkan ini pada kode anda
+```
+const sock = makeWASocket({
+            // can provide additional config here
+            ...
+            printQRInTerminal: true,
+            patchMessageBeforeSending: (message) => {
+                const requiresPatch = !!(
+                    message.buttonsMessage 
+                    || message.templateMessage
+                    || message.listMessage
+                );
+                if (requiresPatch) {
+                    message = {
+                        viewOnceMessage: {
+                            message: {
+                                messageContextInfo: {
+                                    deviceListMetadataVersion: 2,
+                                    deviceListMetadata: {},
+                                },
+                                ...message,
+                            },
+                        },
+                    };
+                }
+
+                return message;
+            },
+    })
+```
+
+
+
 ## Install
 
 Use the stable version:
