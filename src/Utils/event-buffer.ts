@@ -21,7 +21,7 @@ const BUFFERABLE_EVENT = [
 	'groups.update',
 ] as const
 
-const BUFFER_TIMEOUT_MS = 30_000
+const BUFFER_TIMEOUT_MS = 60_000
 
 type BufferableEvent = typeof BUFFERABLE_EVENT[number]
 
@@ -162,6 +162,12 @@ export const makeEventBuffer = (logger: Logger): BaileysBufferableEventEmitter =
 		},
 		processInBuffer(task) {
 			if(isBuffering) {
+				// if flushing right now,
+				// adding this won't make a difference
+				if(waitingForPreBufferEnd) {
+					return
+				}
+
 				preBufferTask = Promise.allSettled([ preBufferTask, task ])
 				preBufferTraces.push(new Error('').stack!)
 			}
