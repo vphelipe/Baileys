@@ -10,7 +10,7 @@
 GRUP INFO BAILEYS: [KLIK DISINI](https://chat.whatsapp.com/LF2GXyxYnCgEEbmHA3KmQo)
 
 ## Button, Template & List ga work?
-silahkan tambahkan ini pada kode anda
+silahkan tambahkan ini pada kode config connection anda
 ```
 const sock = makeWASocket({
             // can provide additional config here
