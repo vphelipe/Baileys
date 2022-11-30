@@ -60,14 +60,16 @@ export const getUrlInfo = async(
 			}
 
 			if(opts.uploadImage) {
-				const { imageMessage } = await prepareWAMessageMedia(
-					{ image: { url: image } },
-					{ upload: opts.uploadImage, mediaTypeOverride: 'thumbnail-link' }
-				)
-				urlInfo.jpegThumbnail = imageMessage?.jpegThumbnail
-					? Buffer.from(imageMessage.jpegThumbnail)
-					: undefined
-				urlInfo.highQualityThumbnail = imageMessage || undefined
+				if(image.startsWith('https://') || image.startsWith('http://')) {
+					const { imageMessage } = await prepareWAMessageMedia(
+						{ image: { url: image } },
+						{ upload: opts.uploadImage, mediaTypeOverride: 'thumbnail-link' }
+					)
+					urlInfo.jpegThumbnail = imageMessage?.jpegThumbnail
+						? Buffer.from(imageMessage.jpegThumbnail)
+						: undefined
+					urlInfo.highQualityThumbnail = imageMessage || undefined
+				}
 			} else {
 				try {
 					urlInfo.jpegThumbnail = image
