@@ -1,0 +1,884 @@
+[
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJzZXR0aW5nX2xvY2FsZSJd",
+				"value": {
+					"timestamp": "1672265110409",
+					"localeSetting": {
+						"locale": "en-RU"
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"setting_locale"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJzZXR0aW5nX2xvY2FsZSJd",
+				"value": {
+					"timestamp": "1672265110409",
+					"localeSetting": {
+						"locale": "en-RU"
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"setting_locale"
+			]
+		},
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJzZXR0aW5nX3B1c2hOYW1lIl0=",
+				"value": {
+					"timestamp": "1672265110409",
+					"pushNameSetting": {
+						"name": "SquareOne Signals"
+					}
+				},
+				"padding": "",
+				"version": 1
+			},
+			"index": [
+				"setting_pushName"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJjb250YWN0IiwiNzkxNjY3NzQ1MDlAcy53aGF0c2FwcC5uZXQiXQ==",
+				"value": {
+					"timestamp": "1672265110412",
+					"contactAction": {
+						"fullName": "Pavel"
+					}
+				},
+				"padding": "",
+				"version": 2
+			},
+			"index": [
+				"contact",
+				"79166774509@s.whatsapp.net"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJxdWlja19yZXBseSIsIjEiXQ==",
+				"value": {
+					"timestamp": "1672265111514",
+					"quickReplyAction": {
+						"shortcut": "thanks",
+						"message": "Thank you for your business! We look forward to working with you again.",
+						"count": 0,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 2
+			},
+			"index": [
+				"quick_reply",
+				"1"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJxdWlja19yZXBseSIsIjEiXQ==",
+				"value": {
+					"timestamp": "1672265111514",
+					"quickReplyAction": {
+						"shortcut": "thanks",
+						"message": "Thank you for your business! We look forward to working with you again.",
+						"count": 0,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 2
+			},
+			"index": [
+				"quick_reply",
+				"1"
+			]
+		},
+		"id": "1",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9qaWQiLCIxIiwiNzkxNjY3NzQ1MDlAcy53aGF0c2FwcC5uZXQiXQ==",
+				"value": {
+					"timestamp": "1672265111487",
+					"labelAssociationAction": {
+						"labeled": true
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_jid",
+				"1",
+				"79166774509@s.whatsapp.net"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9qaWQiLCIxIiwiNzkxNjY3NzQ1MDlAcy53aGF0c2FwcC5uZXQiXQ==",
+				"value": {
+					"timestamp": "1672265111487",
+					"labelAssociationAction": {
+						"labeled": true
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_jid",
+				"1",
+				"79166774509@s.whatsapp.net"
+			]
+		},
+		"id": "1",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiMSJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "New customer",
+						"color": 1,
+						"predefinedId": 1,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"1"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiMSJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "New customer",
+						"color": 1,
+						"predefinedId": 1,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"1"
+			]
+		},
+		"id": "1",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiMiJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "New order",
+						"color": 2,
+						"predefinedId": 2,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"2"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiMiJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "New order",
+						"color": 2,
+						"predefinedId": 2,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"2"
+			]
+		},
+		"id": "2",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiMyJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "Pending payment",
+						"color": 0,
+						"predefinedId": 3,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"3"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiMyJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "Pending payment",
+						"color": 0,
+						"predefinedId": 3,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"3"
+			]
+		},
+		"id": "3",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiNCJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "Paid",
+						"color": 3,
+						"predefinedId": 4,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"4"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiNCJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "Paid",
+						"color": 3,
+						"predefinedId": 4,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"4"
+			]
+		},
+		"id": "4",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiNSJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "Order complete",
+						"color": 5,
+						"predefinedId": 5,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"5"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9lZGl0IiwiNSJd",
+				"value": {
+					"timestamp": "1672265111508",
+					"labelEditAction": {
+						"name": "Order complete",
+						"color": 5,
+						"predefinedId": 5,
+						"deleted": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_edit",
+				"5"
+			]
+		},
+		"id": "5",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJkZXZpY2VBZ2VudCIsIjk2NzY3Y2FkLTVlZmUtNDA5MS04N2RmLWEzZWFjNTlmYTc1YyJd",
+				"value": {
+					"timestamp": "1672265111490",
+					"agentAction": {
+						"name": "SquareOne Signals (Admin)",
+						"deviceID": 0,
+						"isDeleted": false
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"deviceAgent",
+				"96767cad-5efe-4091-87df-a3eac59fa75c"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJkZXZpY2VBZ2VudCIsIjk2NzY3Y2FkLTVlZmUtNDA5MS04N2RmLWEzZWFjNTlmYTc1YyJd",
+				"value": {
+					"timestamp": "1672265111490",
+					"agentAction": {
+						"name": "SquareOne Signals (Admin)",
+						"deviceID": 0,
+						"isDeleted": false
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"deviceAgent",
+				"96767cad-5efe-4091-87df-a3eac59fa75c"
+			]
+		},
+		"id": "96767cad-5efe-4091-87df-a3eac59fa75c",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJwcmltYXJ5X2ZlYXR1cmUiXQ==",
+				"value": {
+					"timestamp": "1672265111490",
+					"primaryFeature": {
+						"flags": [
+							"contact_except",
+							"ddm_settings",
+							"vo_sp_receiver",
+							"link_preview",
+							"poll_creation_group",
+							"poll_creation_on_one_one",
+							"reactions_send"
+						]
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"primary_feature"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJwcmltYXJ5X2ZlYXR1cmUiXQ==",
+				"value": {
+					"timestamp": "1672265111490",
+					"primaryFeature": {
+						"flags": [
+							"contact_except",
+							"ddm_settings",
+							"vo_sp_receiver",
+							"link_preview",
+							"poll_creation_group",
+							"poll_creation_on_one_one",
+							"reactions_send"
+						]
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"primary_feature"
+			]
+		},
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJkZXZpY2VBZ2VudCIsIjhlZDU1YjA0LWEwOGUtNDA0ZS05ZTZmLTNhY2FjMWRhNGFlMiJd",
+				"value": {
+					"timestamp": "1672265121742",
+					"agentAction": {
+						"name": "Pi20",
+						"deviceID": 1,
+						"isDeleted": false
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"deviceAgent",
+				"8ed55b04-a08e-404e-9e6f-3acac1da4ae2"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJkZXZpY2VBZ2VudCIsIjhlZDU1YjA0LWEwOGUtNDA0ZS05ZTZmLTNhY2FjMWRhNGFlMiJd",
+				"value": {
+					"timestamp": "1672265121742",
+					"agentAction": {
+						"name": "Pi20",
+						"deviceID": 1,
+						"isDeleted": false
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"deviceAgent",
+				"8ed55b04-a08e-404e-9e6f-3acac1da4ae2"
+			]
+		},
+		"id": "8ed55b04-a08e-404e-9e6f-3acac1da4ae2",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9qaWQiLCIzIiwiNzkxNjY3NzQ1MDlAcy53aGF0c2FwcC5uZXQiXQ==",
+				"value": {
+					"timestamp": "1672265197084",
+					"labelAssociationAction": {
+						"labeled": true
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_jid",
+				"3",
+				"79166774509@s.whatsapp.net"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9qaWQiLCIzIiwiNzkxNjY3NzQ1MDlAcy53aGF0c2FwcC5uZXQiXQ==",
+				"value": {
+					"timestamp": "1672265197084",
+					"labelAssociationAction": {
+						"labeled": true
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_jid",
+				"3",
+				"79166774509@s.whatsapp.net"
+			]
+		},
+		"id": "3",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJkZXZpY2VBZ2VudCIsIjQxZTdkNDI4LWYyNWMtNDI4ZC1iZDBjLTcxYTMzOWE1YWVmYyJd",
+				"value": {
+					"timestamp": "1672267689167",
+					"agentAction": {
+						"name": "Google Chrome (Baileys)",
+						"deviceID": 2,
+						"isDeleted": false
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"deviceAgent",
+				"41e7d428-f25c-428d-bd0c-71a339a5aefc"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJkZXZpY2VBZ2VudCIsIjQxZTdkNDI4LWYyNWMtNDI4ZC1iZDBjLTcxYTMzOWE1YWVmYyJd",
+				"value": {
+					"timestamp": "1672267689167",
+					"agentAction": {
+						"name": "Google Chrome (Baileys)",
+						"deviceID": 2,
+						"isDeleted": false
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"deviceAgent",
+				"41e7d428-f25c-428d-bd0c-71a339a5aefc"
+			]
+		},
+		"id": "41e7d428-f25c-428d-bd0c-71a339a5aefc",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJ0aW1lX2Zvcm1hdCJd",
+				"value": {
+					"timestamp": "1672265111466",
+					"timeFormatAction": {
+						"isTwentyFourHourFormatEnabled": true
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"time_format"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJ0aW1lX2Zvcm1hdCJd",
+				"value": {
+					"timestamp": "1672265111466",
+					"timeFormatAction": {
+						"isTwentyFourHourFormatEnabled": true
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"time_format"
+			]
+		},
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJwcmltYXJ5X3ZlcnNpb24iLCJjdXJyZW50Il0=",
+				"value": {
+					"timestamp": "1672265111471",
+					"primaryVersionAction": {
+						"version": "2.22.24.78"
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"primary_version",
+				"current"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJwcmltYXJ5X3ZlcnNpb24iLCJjdXJyZW50Il0=",
+				"value": {
+					"timestamp": "1672265111471",
+					"primaryVersionAction": {
+						"version": "2.22.24.78"
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"primary_version",
+				"current"
+			]
+		},
+		"id": "current",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJwcmltYXJ5X3ZlcnNpb24iLCJzZXNzaW9uX3N0YXJ0Il0=",
+				"value": {
+					"timestamp": "1672265111471",
+					"primaryVersionAction": {
+						"version": "2.22.24.78"
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"primary_version",
+				"session_start"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJwcmltYXJ5X3ZlcnNpb24iLCJzZXNzaW9uX3N0YXJ0Il0=",
+				"value": {
+					"timestamp": "1672265111471",
+					"primaryVersionAction": {
+						"version": "2.22.24.78"
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"primary_version",
+				"session_start"
+			]
+		},
+		"id": "session_start",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJzZXR0aW5nX3VuYXJjaGl2ZUNoYXRzIl0=",
+				"value": {
+					"timestamp": "1672265111490",
+					"unarchiveChatsSetting": {
+						"unarchiveChats": false
+					}
+				},
+				"padding": "",
+				"version": 4
+			},
+			"index": [
+				"setting_unarchiveChats"
+			]
+		},
+		"initialSync": true,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJkZXZpY2VBZ2VudCIsIjQxZTdkNDI4LWYyNWMtNDI4ZC1iZDBjLTcxYTMzOWE1YWVmYyJd",
+				"value": {
+					"timestamp": "1672267714769",
+					"agentAction": {
+						"name": "Pi20-Baileys",
+						"deviceID": 2,
+						"isDeleted": false
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"deviceAgent",
+				"41e7d428-f25c-428d-bd0c-71a339a5aefc"
+			]
+		},
+		"initialSync": false,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJkZXZpY2VBZ2VudCIsIjQxZTdkNDI4LWYyNWMtNDI4ZC1iZDBjLTcxYTMzOWE1YWVmYyJd",
+				"value": {
+					"timestamp": "1672267714769",
+					"agentAction": {
+						"name": "Pi20-Baileys",
+						"deviceID": 2,
+						"isDeleted": false
+					}
+				},
+				"padding": "",
+				"version": 7
+			},
+			"index": [
+				"deviceAgent",
+				"41e7d428-f25c-428d-bd0c-71a339a5aefc"
+			]
+		},
+		"id": "41e7d428-f25c-428d-bd0c-71a339a5aefc",
+		"msg": "unprocessable update"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9qaWQiLCIzIiwiNzkxNjY3NzQ1MDlAcy53aGF0c2FwcC5uZXQiXQ==",
+				"value": {
+					"timestamp": "1672267758519",
+					"labelAssociationAction": {
+						"labeled": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_jid",
+				"3",
+				"79166774509@s.whatsapp.net"
+			]
+		},
+		"initialSync": false,
+		"msg": "processing sync action"
+	},
+	{
+		"syncAction": {
+			"syncAction": {
+				"index": "WyJsYWJlbF9qaWQiLCIzIiwiNzkxNjY3NzQ1MDlAcy53aGF0c2FwcC5uZXQiXQ==",
+				"value": {
+					"timestamp": "1672267758519",
+					"labelAssociationAction": {
+						"labeled": false
+					}
+				},
+				"padding": "",
+				"version": 3
+			},
+			"index": [
+				"label_jid",
+				"3",
+				"79166774509@s.whatsapp.net"
+			]
+		},
+		"id": "3",
+		"msg": "unprocessable update"
+	}
+]

@@ -14,7 +14,7 @@ browser-token.json
 Proxy
 messages*.json
 test.ts
-TestData
+#TestData
 
 package-lock.json
 yarn.lock
