@@ -10,11 +10,13 @@ import { downloadContentFromMessage } from './messages-media'
 
 const inflatePromise = promisify(inflate)
 
-export const downloadHistory = async(
+export const downloadHistory = async (
 	msg: proto.Message.IHistorySyncNotification,
 	options: AxiosRequestConfig<any>
 ) => {
-	const stream = await downloadContentFromMessage(msg, 'md-msg-hist', { options })
+	const stream = await downloadContentFromMessage(msg, 'md-msg-hist', {
+		options,
+	})
 	const bufferArray: Buffer[] = []
 	for await (const chunk of stream) {
 		bufferArray.push(chunk)
@@ -35,58 +37,63 @@ export const processHistoryMessage = (item: proto.IHistorySync) => {
 	const chats: Chat[] = []
 
 	switch (item.syncType) {
-	case proto.HistorySync.HistorySyncType.INITIAL_BOOTSTRAP:
-	case proto.HistorySync.HistorySyncType.RECENT:
-	case proto.HistorySync.HistorySyncType.FULL:
-		for(const chat of item.conversations! as Chat[]) {
-			contacts.push({ id: chat.id, name: chat.name || undefined })
+		case proto.HistorySync.HistorySyncType.INITIAL_BOOTSTRAP:
+		case proto.HistorySync.HistorySyncType.RECENT:
+		case proto.HistorySync.HistorySyncType.FULL:
+			for (const chat of item.conversations! as Chat[]) {
+				contacts.push({ id: chat.id, name: chat.name || undefined })
 
-			const msgs = chat.messages || []
-			delete chat.messages
-			delete chat.archived
-			delete chat.muteEndTime
-			delete chat.pinned
+				const msgs = chat.messages || []
+				delete chat.messages
+				delete chat.archived
+				delete chat.muteEndTime
+				delete chat.pinned
 
-			for(const item of msgs) {
-				const message = item.message!
-				messages.push(message)
+				for (const item of msgs) {
+					const message = item.message!
+					messages.push(message)
 
-				if(!chat.messages?.length) {
-					// keep only the most recent message in the chat array
-					chat.messages = [{ message }]
+					if (!chat.messages?.length) {
+						// keep only the most recent message in the chat array
+						chat.messages = [{ message }]
+					}
+
+					if (!message.key.fromMe && !chat.lastMessageRecvTimestamp) {
+						chat.lastMessageRecvTimestamp = toNumber(
+							message.messageTimestamp
+						)
+					}
+
+					if (
+						(message.messageStubType ===
+							WAMessageStubType.BIZ_PRIVACY_MODE_TO_BSP ||
+							message.messageStubType ===
+								WAMessageStubType.BIZ_PRIVACY_MODE_TO_FB) &&
+						message.messageStubParameters?.[0]
+					) {
+						contacts.push({
+							id:
+								message.key.participant ||
+								message.key.remoteJid!,
+							verifiedName: message.messageStubParameters?.[0],
+						})
+					}
 				}
 
-				if(!message.key.fromMe && !chat.lastMessageRecvTimestamp) {
-					chat.lastMessageRecvTimestamp = toNumber(message.messageTimestamp)
+				if (isJidUser(chat.id) && chat.readOnly && chat.archived) {
+					delete chat.readOnly
 				}
 
-				if(
-					(message.messageStubType === WAMessageStubType.BIZ_PRIVACY_MODE_TO_BSP
-					|| message.messageStubType === WAMessageStubType.BIZ_PRIVACY_MODE_TO_FB
-					)
-					&& message.messageStubParameters?.[0]
-				) {
-					contacts.push({
-						id: message.key.participant || message.key.remoteJid!,
-						verifiedName: message.messageStubParameters?.[0],
-					})
-				}
+				chats.push({ ...chat })
 			}
 
-			if(isJidUser(chat.id) && chat.readOnly && chat.archived) {
-				delete chat.readOnly
+			break
+		case proto.HistorySync.HistorySyncType.PUSH_NAME:
+			for (const c of item.pushnames!) {
+				contacts.push({ id: c.id!, notify: c.pushname! })
 			}
 
-			chats.push({ ...chat })
-		}
-
-		break
-	case proto.HistorySync.HistorySyncType.PUSH_NAME:
-		for(const c of item.pushnames!) {
-			contacts.push({ id: c.id!, notify: c.pushname! })
-		}
-
-		break
+			break
 	}
 
 	return {
@@ -96,7 +103,7 @@ export const processHistoryMessage = (item: proto.IHistorySync) => {
 	}
 }
 
-export const downloadAndProcessHistorySyncNotification = async(
+export const downloadAndProcessHistorySyncNotification = async (
 	msg: proto.Message.IHistorySyncNotification,
 	options: AxiosRequestConfig<any>
 ) => {
@@ -105,8 +112,11 @@ export const downloadAndProcessHistorySyncNotification = async(
 }
 
 export const getHistoryMsg = (message: proto.IMessage) => {
-	const normalizedContent = !!message ? normalizeMessageContent(message) : undefined
-	const anyHistoryMsg = normalizedContent?.protocolMessage?.historySyncNotification
+	const normalizedContent = !!message
+		? normalizeMessageContent(message)
+		: undefined
+	const anyHistoryMsg =
+		normalizedContent?.protocolMessage?.historySyncNotification
 
 	return anyHistoryMsg
 }
