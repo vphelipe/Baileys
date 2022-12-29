@@ -54,7 +54,7 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 		...args: any[]
 	) => KeyedDB<Chat, string>
 
-	const chats = new KeyedDB(chatKey, (c) => c.id)
+	const chats = new KeyedDB(chatKey, (c: { id: any }) => c.id)
 	const messages: { [_: string]: ReturnType<typeof makeMessagesDictionary> } =
 		{}
 	const contacts: { [_: string]: Contact } = {}
@@ -62,6 +62,8 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 	const presences: { [id: string]: { [participant: string]: PresenceData } } =
 		{}
 	const state: ConnectionState = { connection: 'close' }
+	const labels: { [_: string]: ReturnType<typeof makeMessagesDictionary> } =
+		{}
 
 	const assertMessageList = (jid: string) => {
 		if (!messages[jid]) {
@@ -300,6 +302,8 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 		chats,
 		contacts,
 		messages,
+		labels,
+		contactsByLabels,
 	})
 
 	const fromJSON = (json: {
