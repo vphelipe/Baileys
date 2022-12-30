@@ -526,7 +526,31 @@ export const chatModificationToAppPatch = (
 			apiVersion: 2,
 			operation: OP.SET
 		}
-	} else if('archive' in mod) {
+	} else if ('removelabel' in mod) {
+        patch = {
+            syncAction: {
+                labelAssociationAction: {
+                    "labeled":false
+                }
+            },
+            index: ['label_jid', mod.removelabel, jid],
+            type: 'regular_low',
+            apiVersion: 5,
+            operation: OP.SET
+        };
+    } else if ('addlabel' in mod) {
+        patch = {
+            syncAction: {
+                labelAssociationAction: {
+                    "labeled":true
+                }
+            },
+            index: ['label_jid', mod.addlabel, jid],
+            type: 'regular_low',
+            apiVersion: 5,
+            operation: OP.SET
+        };
+    } else if('archive' in mod) {
 		patch = {
 			syncAction: {
 				archiveChatAction: {
