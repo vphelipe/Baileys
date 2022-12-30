@@ -396,6 +396,37 @@ export const makeSocket = ({
 			]
 		})
 	)
+	
+	const caiu = () => {
+		return !!(closed || ws.readyState !== ws.OPEN);
+};
+
+const desliga = async () => {
+	await new Promise((resolve, reject) => {
+	if (closed) {
+		resolve();
+        //logger.trace({ trace: error === null || error === void 0 ? void 0 : error.stack }, 'connection already closed');
+        return;
+    }
+    closed = true;
+    //logger.info({ trace: error === null || error === void 0 ? void 0 : error.stack }, error ? 'connection errored' : 'connection closed');
+    clearInterval(keepAliveReq);
+    clearTimeout(qrTimer);
+    ws.removeAllListeners('close');
+    ws.removeAllListeners('error');
+    ws.removeAllListeners('open');
+    ws.removeAllListeners('message');
+    if(ws.readyState === ws.OPEN) {
+	//if (ws.readyState !== ws.CLOSED && ws.readyState !== ws.CLOSING) {
+        try {
+            ws.close();
+        }
+        catch (_a) { }
+    }		
+    ev.removeAllListeners('connection.update');
+	resolve();
+	});
+};
 
 	/** logout & invalidate connection */
 	const logout = async(msg?: string) => {
@@ -578,6 +609,8 @@ export const makeSocket = ({
 		sendRawMessage,
 		sendNode,
 		logout,
+		caiu,
+		desliga,
 		end,
 		onUnexpectedError,
 		uploadPreKeys,
