@@ -16,6 +16,14 @@ import type {
 	WAMessageKey,
 } from '../Types'
 import {
+	JsonLabels,
+	JsonLabelsForContact,
+	Label,
+	LabelAssocAction,
+	labelsById,
+	labelsForContact,
+} from '../Types/Labels'
+import {
 	toNumber,
 	updateMessageWithReaction,
 	updateMessageWithReceipt,
@@ -62,8 +70,6 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 	const presences: { [id: string]: { [participant: string]: PresenceData } } =
 		{}
 	const state: ConnectionState = { connection: 'close' }
-	const labels: { [_: string]: ReturnType<typeof makeMessagesDictionary> } =
-		{}
 
 	const assertMessageList = (jid: string) => {
 		if (!messages[jid]) {
@@ -296,21 +302,41 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 				}
 			}
 		})
+		ev.on('label.edit', (newLabel: Label) => {
+			labelsById.set(newLabel.predefinedId || 0, newLabel)
+		})
+		ev.on('label.association', (newAssoc: LabelAssocAction) => {
+			const label: Label = labelsById.getIfAbsent(
+				newAssoc.labelPredefinedId,
+				{
+					predefinedId: -1,
+					name: 'UNKNOWN_LABEL',
+				}
+			)
+			labelsForContact.appendValueForKey(
+				label.predefinedId || -1,
+				newAssoc.contactName
+			)
+		})
 	}
 
 	const toJSON = () => ({
 		chats,
 		contacts,
 		messages,
-		labels,
-		contactsByLabels,
+		labels: labelsById,
+		labelsForContact,
 	})
 
-	const fromJSON = (json: {
+	type JsonFile = {
 		chats: Chat[]
 		contacts: { [id: string]: Contact }
 		messages: { [id: string]: WAMessage[] }
-	}) => {
+		labels: JsonLabels
+		labelsForContact: JsonLabelsForContact
+	}
+
+	const fromJSON = (json: JsonFile) => {
 		chats.upsert(...json.chats)
 		contactsUpsert(Object.values(json.contacts))
 		for (const jid in json.messages) {
@@ -319,6 +345,17 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 				list.upsert(proto.WebMessageInfo.fromObject(msg), 'append')
 			}
 		}
+		labelsById.fillFromJsonMap(
+			json.labels,
+			(key: any) => Number.parseInt(`$key`),
+			(value: any) =>
+				<Label>{
+					name: value.name as string,
+					color: value.color as number,
+					predefinedId: value.color as number,
+				}
+		)
+		labelsForContact.fillFromJsonMap(json.labelsForContact)
 	}
 
 	return {
@@ -422,7 +459,7 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 				logger.debug({ path }, 'reading from file')
 				const jsonStr = readFileSync(path, { encoding: 'utf-8' })
 				const json = JSON.parse(jsonStr)
-				fromJSON(json)
+				fromJSON(json as JsonFile)
 			}
 		},
 	}
