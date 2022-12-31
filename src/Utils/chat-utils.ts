@@ -526,7 +526,7 @@ export const chatModificationToAppPatch = (
 			apiVersion: 2,
 			operation: OP.SET
 		}
-	} else if ('removelabel' in mod) {
+	} else if ('removelabel2' in mod) {
         patch = {
             syncAction: {
                 labelAssociationAction: {
@@ -538,7 +538,7 @@ export const chatModificationToAppPatch = (
             apiVersion: 5,
             operation: OP.SET
         };
-    } else if ('addlabel' in mod) {
+    } else if ('addlabel2' in mod) {
         patch = {
             syncAction: {
                 labelAssociationAction: {
@@ -628,6 +628,28 @@ export const chatModificationToAppPatch = (
 			index: ['setting_pushName'],
 			type: 'critical_block',
 			apiVersion: 1,
+			operation: OP.SET,
+		}
+	} else if('addLabel' in mod) {
+		patch = {
+			syncAction: {
+				labelAssociationAction:{
+					labeled: true
+				} },
+			index: ['label_jid', mod.addLabel.label, jid ],
+			type: 'regular',
+			apiVersion: 3,
+			operation: OP.SET,
+		}
+	} else if('removeLabel' in mod) {
+		patch = {
+			syncAction: {
+				labelAssociationAction:{
+					labeled: false
+				} },
+			index: ['label_jid', mod.removeLabel.label, jid ],
+			type: 'regular',
+			apiVersion: 3,
 			operation: OP.SET,
 		}
 	} else {
@@ -755,6 +777,18 @@ export const processSyncAction = (
 		if(!isInitialSync) {
 			ev.emit('chats.delete', [id])
 		}
+	} else if(action?.labelAssociationAction) {
+		const label = syncAction.index[1]
+		const chat = syncAction.index[2]
+		const labeled = action.labelAssociationAction.labeled
+
+		logger?.info(`label association updated '${chat}' ${labeled ? '<->' : '<-x->'} label ${label}'`)
+		if(labeled) {
+			ev.emit('labelAssociation.set', { chat, label })
+		} else {
+			ev.emit('labelAssociation.delete', { chat, label })
+		}
+
 	} else {
 		logger?.debug({ syncAction, id }, 'unprocessable update')
 	}
