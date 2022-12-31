@@ -10,7 +10,8 @@
 GRUP INFO BAILEYS: [KLIK DISINI](https://chat.whatsapp.com/LF2GXyxYnCgEEbmHA3KmQo)
 
 ## Button, Template & List ga work?
-silahkan tambahkan ini pada kode config connection anda
+silahkan tambahkan ini pada kode config connection anda.
+jika hydrate ga work, tambahin viewOnce: true setelah footer. kode lengkapnya cek contoh hydrate dibawah
 ```
 const sock = makeWASocket({
             // can provide additional config here
@@ -406,6 +407,7 @@ const templateButtons = [
 const templateMessage = {
     text: "Hi it's a template message",
     footer: 'Hello World',
+    viewOnce: true,
     templateButtons: templateButtons
 }
 

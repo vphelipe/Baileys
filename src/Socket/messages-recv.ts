@@ -5,7 +5,8 @@ import { MessageReceiptType, MessageRelayOptions, MessageUserReceipt, SocketConf
 import { decodeMediaRetryNode, decodeMessageStanza, delay, encodeBigEndian, encodeSignedDeviceIdentity, getCallStatusFromNode, getHistoryMsg, getNextPreKeys, getStatusFromReceiptType, unixTimestampSeconds, xmppPreKey, xmppSignedPreKey } from '../Utils'
 import { makeMutex } from '../Utils/make-mutex'
 import { cleanMessage } from '../Utils/process-message'
-import { areJidsSameUser, BinaryNode, getAllBinaryNodeChildren, getBinaryNodeChild, getBinaryNodeChildren, isJidGroup, isJidUser, jidDecode, jidNormalizedUser, S_WHATSAPP_NET } from '../WABinary'
+import { areJidsSameUser, BinaryNode, getAllBinaryNodeChildren, getBinaryNodeChild, getBinaryNodeChildren, getBinaryNodeChildString, isJidGroup, isJidUser, jidDecode, jidNormalizedUser, S_WHATSAPP_NET } from '../WABinary'
+
 import { extractGroupMetadata } from './groups'
 import { makeMessagesSocket } from './messages-send'
 
@@ -254,6 +255,12 @@ export const makeMessagesRecvSocket = (config: SocketConfig) => {
 			msg.messageStubType = WAMessageStubType.GROUP_CHANGE_RESTRICT
 			msg.messageStubParameters = [ (child.tag === 'locked') ? 'on' : 'off' ]
 			break
+			case 'description':
+				msg.messageStubType = WAMessageStubType.GROUP_CHANGE_DESCRIPTION
+				const desc = getBinaryNodeChildString(child, 'body') || ''
+				msg.messageStubParameters = [ child.attrs.id, desc ]
+				break
+				
 		case 'invite':
 			msg.messageStubType = WAMessageStubType.GROUP_CHANGE_INVITE_LINK
 			msg.messageStubParameters = [ child.attrs.code ]
@@ -268,6 +275,21 @@ export const makeMessagesRecvSocket = (config: SocketConfig) => {
 		const from = jidNormalizedUser(node.attrs.from)
 
 		switch (nodeType) {
+		case 'privacy_token':
+			const tokenList = getBinaryNodeChildren(child, 'token')
+			for(const { attrs, content } of tokenList) {
+				const jid = attrs.jid
+				ev.emit('chats.update', [
+					{
+						id: jid,
+						tcToken: content as Buffer
+					}
+				])
+
+				logger.debug({ jid }, 'got privacy token update')
+			}
+
+			break
 		case 'w:gp2':
 			handleGroupNotification(node.attrs.participant, child, result)
 			break
@@ -645,33 +667,15 @@ export const makeMessagesRecvSocket = (config: SocketConfig) => {
 		identifier: string,
 		exec: (node: BinaryNode) => Promise<any>
 	) => {
-		const started = ev.buffer()
-		if(started) {
-			await execTask()
-			if(started) {
-				await ev.flush()
-			}
-		} else {
-			const task = execTask()
-			ev.processInBuffer(task)
-		}
+		ev.buffer()
+		await execTask()
+		ev.flush()
 
 		function execTask() {
 			return exec(node)
 				.catch(err => onUnexpectedError(err, identifier))
 		}
 	}
-
-	// called when all offline notifs are handled
-	ws.on('CB:ib,,offline', async(node: BinaryNode) => {
-		const child = getBinaryNodeChild(node, 'offline')
-		const offlineNotifs = +(child?.attrs.count || 0)
-
-		logger.info(`handled ${offlineNotifs} offline messages/notifications`)
-		await ev.flush()
-
-		ev.emit('connection.update', { receivedPendingNotifications: true })
-	})
 
 	// recv a message
 	ws.on('CB:message', (node: BinaryNode) => {

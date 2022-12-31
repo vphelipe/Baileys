@@ -291,7 +291,7 @@ export const generateWAMessageContent = async(
 
 		if(urlInfo) {
 			extContent.canonicalUrl = urlInfo['canonical-url']
-			extContent.matchedText = urlInfo['matched-text']
+			extContent.matchedText = urlInfo['canonical-url']
 			extContent.jpegThumbnail = urlInfo.jpegThumbnail
 			extContent.description = urlInfo.description
 			extContent.title = urlInfo.title
@@ -456,7 +456,9 @@ const [messageType] = Object.keys(m)
 		m[messageType].contextInfo.mentionedJid = message.mentions
 	}
 
-if('contextInfo' in message && message) {
+	if ('contextInfo' in message && !!message.contextInfo) {
+		const [messageType] = Object.keys(m)
+		m[messageType].contextInfo = m[messageType] || { }
 		m[messageType].contextInfo = message.contextInfo
 	}
 	
@@ -482,7 +484,7 @@ export const generateWAMessageFromContent = (
 		let quotedMsg = normalizeMessageContent(quoted.message)!
 		const msgType = getContentType(quotedMsg)!
 		// strip any redundant properties
-		quotedMsg = proto.Message.fromObject({ [msgType]: quotedMsg[msgType] })
+		quotedMsg = proto.Message.fromObject({ [msgType]: quotedMsg ? quotedMsg[msgType] : undefined })
 
 		const quotedContent = quotedMsg[msgType]
 		if(typeof quotedContent === 'object' && quotedContent && 'contextInfo' in quotedContent) {
@@ -573,13 +575,31 @@ export const getContentType = (content: WAProto.IMessage | undefined) => {
  * @returns
  */
 export const normalizeMessageContent = (content: WAMessageContent | null | undefined): WAMessageContent | undefined => {
-	content = content?.ephemeralMessage?.message?.viewOnceMessage?.message ||
-				content?.ephemeralMessage?.message ||
-				content?.viewOnceMessage?.message ||
-				content?.documentWithCaptionMessage?.message ||
-				content ||
-				undefined
-	return content
+	if(!content) {
+		return undefined
+	}
+
+	// set max iterations to prevent an infinite loop
+	for(let i = 0;i < 5;i++) {
+		const inner = getFutureProofMessage(content)
+		if(!inner) {
+			break
+		}
+
+		content = inner.message
+	}
+
+	return content!
+
+	function getFutureProofMessage(message: typeof content) {
+		return (
+			message?.ephemeralMessage
+			|| message?.viewOnceMessage
+			|| message?.documentWithCaptionMessage
+			|| message?.viewOnceMessageV2
+			|| message?.editedMessage
+		)
+	}
 }
 
 /**
