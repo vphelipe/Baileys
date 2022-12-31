@@ -33,9 +33,8 @@ describe('extend-store-with-labels', () => {
 		ev = makeEventBuffer(logger)
 
 		store = makeInMemoryStore({ logger })
-		store.bind(ev)
 		// ev.buffer()
-		store.readFromFile('../../baileys_store_multi.json')
+		store.readFromFile('./baileys_store_multi.json')
 		// store.readFromFile('./TestData/formatted-baileys_store_multi.json')
 		// store.readFromFile('./TestData/baileys_store_multi_withLabels.json')
 		// ev.flush()
@@ -115,8 +114,10 @@ describe('extend-store-with-labels', () => {
 
 	it('processSyncAction inserts', () => {
 		const chatMutations = getSampleProtoActions() as DumpedLogChatMutation[]
+		store.bind(ev)
 
-		// WRONG!! store doesn't get updates
+		// WRONG!! in-memory-store doesn't get updates
+		// FIXME POTENTIAL_ENDLESS_LOOP
 		ev.buffer()
 		for (const chatMutation of chatMutations) {
 			console.warn(JSON.stringify(chatMutation.syncAction, null, 2))
@@ -128,10 +129,11 @@ describe('extend-store-with-labels', () => {
 				logger
 			)
 		}
-		// WRONG!! store doesn't get updates
+		// WRONG!! in-memory-store doesn't get updates
+		// FIXME POTENTIAL_ENDLESS_LOOP
 		ev.flush()
 
-		store.writeToFile('./TestData/baileys_store_multi_withLabels.json')
+		store.writeToFile('./TestData/WITH_LABELS_baileys_store_multi.json')
 	})
 })
 

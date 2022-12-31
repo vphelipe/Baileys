@@ -629,16 +629,17 @@ function append<E extends BufferableEvent>(
 function consolidateEvents(data: BufferedEventData) {
 	const map: BaileysEventData = {}
 
-	if (!data.historySets.empty) {
-		map['messaging-history.set'] = {
-			chats: Object.values(data.historySets.chats),
-			messages: Object.values(data.historySets.messages),
-			contacts: Object.values(data.historySets.contacts),
-			labelsById: data.historySets.labelsById.clone(),
-			labelIdsForContact: data.historySets.labelIdsForContact.clone(),
-			isLatest: data.historySets.isLatest,
-		}
+	// FIXME POTENTIAL_ENDLESS_LOOP
+	// if (!data.historySets.empty) {
+	map['messaging-history.set'] = {
+		chats: Object.values(data.historySets.chats),
+		messages: Object.values(data.historySets.messages),
+		contacts: Object.values(data.historySets.contacts),
+		labelsById: data.historySets.labelsById.clone(),
+		labelIdsForContact: data.historySets.labelIdsForContact.clone(),
+		isLatest: data.historySets.isLatest,
 	}
+	// }
 
 	const chatUpsertList = Object.values(data.chatUpserts)
 	if (chatUpsertList.length) {

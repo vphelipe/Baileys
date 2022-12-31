@@ -1,0 +1,490 @@
+{
+  "chats": [
+    {
+      "participant": [],
+      "id": "status@broadcast",
+      "messages": [
+        {
+          "message": {
+            "key": {
+              "remoteJid": "status@broadcast",
+              "fromMe": false,
+              "id": "402655821937539347264170951870"
+            },
+            "message": {
+              "videoMessage": {
+                "mimetype": "video/mp4",
+                "fileSha256": "IK/8rrQrI6fBCUB4ECXi9m84SAAdZqknrb5GrJIcgxU=",
+                "fileLength": "1155282",
+                "mediaKey": "Kwm9N0Nh77Uorvoams8qH2X+vGgukhtzctXrGyep4QA=",
+                "fileEncSha256": "lCLQG8tb8I/8lZNnVK0A98y0prvIHXmq0zKCksUJPL0=",
+                "staticUrl": "https://static.whatsapp.net/downloadable?category=PSA&id=740587949688236557&num=003a272b-3b49-4d57-a7db-519f4f77ca31"
+              }
+            },
+            "messageTimestamp": "0",
+            "participant": "0@s.whatsapp.net",
+            "ephemeralOutOfSync": false
+          }
+        }
+      ],
+      "lastMessageRecvTimestamp": 0
+    },
+    {
+      "id": "79870852993@s.whatsapp.net",
+      "conversationTimestamp": 1672267688,
+      "unreadCount": 1
+    },
+    {
+      "participant": [],
+      "id": "79166774509@s.whatsapp.net",
+      "unreadCount": 0,
+      "readOnly": false,
+      "ephemeralExpiration": 0,
+      "conversationTimestamp": {
+        "low": 1672264354,
+        "high": 0,
+        "unsigned": true
+      },
+      "notSpam": true,
+      "disappearingMode": {
+        "initiator": "CHANGED_IN_CHAT"
+      },
+      "unreadMentionCount": 0,
+      "contactPrimaryIdentityKey": {
+        "type": "Buffer",
+        "data": [
+          216,
+          112,
+          18,
+          24,
+          6,
+          183,
+          253,
+          33,
+          155,
+          30,
+          136,
+          229,
+          184,
+          221,
+          238,
+          144,
+          152,
+          29,
+          228,
+          155,
+          239,
+          49,
+          51,
+          55,
+          174,
+          194,
+          138,
+          60,
+          79,
+          203,
+          221,
+          83
+        ]
+      },
+      "tcTokenSenderTimestamp": {
+        "low": 1672264353,
+        "high": 0,
+        "unsigned": true
+      },
+      "messages": [
+        {
+          "message": {
+            "key": {
+              "remoteJid": "79166774509@s.whatsapp.net",
+              "fromMe": true,
+              "id": "E00E0D0878851310DD6F62610FB48174"
+            },
+            "message": {
+              "conversation": "Hi from SquareOne Signals"
+            },
+            "messageTimestamp": "1672264354",
+            "status": "READ",
+            "userReceipt": [
+              {
+                "userJid": "79166774509@s.whatsapp.net",
+                "receiptTimestamp": "1672264356",
+                "readTimestamp": "1672264411",
+                "playedTimestamp": "0"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "contacts": {},
+  "messages": {
+    "79166774509@s.whatsapp.net": [
+      {
+        "key": {
+          "remoteJid": "79166774509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "9A4D4D398C75E87BFC066685AB75975E"
+        },
+        "messageTimestamp": "1672264343",
+        "messageStubType": "E2E_ENCRYPTED"
+      },
+      {
+        "key": {
+          "remoteJid": "79166774509@s.whatsapp.net",
+          "fromMe": true,
+          "id": "E00E0D0878851310DD6F62610FB48174"
+        },
+        "message": {
+          "conversation": "Hi from SquareOne Signals"
+        },
+        "messageTimestamp": "1672264354",
+        "status": "READ",
+        "userReceipt": [
+          {
+            "userJid": "79166774509@s.whatsapp.net",
+            "receiptTimestamp": "1672264356",
+            "readTimestamp": "1672264411",
+            "playedTimestamp": "0"
+          }
+        ]
+      }
+    ],
+    "79870852993@s.whatsapp.net": [
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "7E0D93128160D898106F638A95518C07"
+        },
+        "messageTimestamp": "1672264055",
+        "messageStubType": "E2E_ENCRYPTED"
+      },
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "529049DE5433E1AAD10803C8C300572F"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "APP_STATE_SYNC_KEY_SHARE",
+            "appStateSyncKeyShare": {
+              "keys": [
+                {
+                  "keyId": {
+                    "keyId": "AAAAAOP5"
+                  },
+                  "keyData": {
+                    "keyData": "lI+2IUhzoEArIrUmD6gbEIfqIeVxM+pusevAmRtLVvo=",
+                    "fingerprint": {
+                      "rawId": 1373244474,
+                      "currentIndex": 1,
+                      "deviceIndexes": [
+                        0,
+                        1
+                      ]
+                    },
+                    "timestamp": "1672265110427"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "messageTimestamp": "1672267688",
+        "status": "SERVER_ACK",
+        "pushName": "SquareOne Signals",
+        "verifiedBizName": "SquareOne Signals"
+      },
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "8EDECC0477C6D18D81D0FBC9A59AEFB9"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "INITIAL_SECURITY_NOTIFICATION_SETTING_SYNC",
+            "initialSecurityNotificationSettingSync": {
+              "securityNotificationEnabled": false
+            }
+          }
+        },
+        "messageTimestamp": "1672267688",
+        "status": "SERVER_ACK",
+        "pushName": "SquareOne Signals",
+        "verifiedBizName": "SquareOne Signals"
+      },
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3ABF2B4C2AAA980CA60A11307AEA44E6"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileSha256": "Hcnt7mnKMlwJNmHCjlPQZ4BGKlPEEVUqwX3nsqY7hc0=",
+              "fileLength": "887",
+              "mediaKey": "vr0Y7wl67UzHQRZ124YxD3Md4+efEB+TOrcuV30BdIA=",
+              "fileEncSha256": "lyYXjP8EbH5Ys9Sb8XCj3exth5jonGk7rAsRFSjKw90=",
+              "directPath": "/v/t62.31111-24/30700438_708334420860028_2489962038137129919_n.enc?ccb=11-4&oh=01_AdRfq4DJfEAbasu4VHFXHMRLj_HLITKw8aphNjCLjcDe5Q&oe=63D4509B",
+              "syncType": "INITIAL_STATUS_V3"
+            }
+          }
+        },
+        "messageTimestamp": "1672267688",
+        "status": "SERVER_ACK",
+        "pushName": "SquareOne Signals",
+        "verifiedBizName": "SquareOne Signals"
+      },
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "A3185469252AC61B2A628C8F454E4351"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileSha256": "ysPEn+MnKu7WPFypwf3o7iUlUZGG39fO46qOkiOVbwQ=",
+              "fileLength": "10",
+              "mediaKey": "W4l+VFwF56FuXX2fV2Nt3ej9cTOsXrMRbhRqw//AREc=",
+              "fileEncSha256": "CguHc1YF6+z538gsrPqaN4ZGhCT6Cj+XA8fjtxr6G+w=",
+              "directPath": "/v/t62.31111-24/40308822_148082148027650_1697907975270106208_n.enc?ccb=11-4&oh=01_AdRPcHc1euDL_hTuIInYrJQuXfiv6_JR42JemTwoLa5sRA&oe=63D45114",
+              "syncType": "PUSH_NAME",
+              "chunkOrder": 1
+            }
+          }
+        },
+        "messageTimestamp": "1672267688",
+        "status": "SERVER_ACK",
+        "pushName": "SquareOne Signals",
+        "verifiedBizName": "SquareOne Signals"
+      },
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "DE0E45D778F83B0713D47CA36E78342B"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileSha256": "I8QhVwXRUiXc1N6pYTeR8acxlV4Q3q+gH0RJGTYiR1U=",
+              "fileLength": "289",
+              "mediaKey": "lJg1PpA/FSn4oPHtRmEJuUZeqy0XzPKJeoIoS/RSLPA=",
+              "fileEncSha256": "gH+KWeMClt8VPCZbWUGv2r3g7IyS6tLPZRg1pg8+W5Y=",
+              "directPath": "/v/t62.31111-24/31601015_1202095357103142_6351966673837624460_n.enc?ccb=11-4&oh=01_AdT6jeqHdWf3UcUIpT1kRmNEw6FVjiXrMOa8J3wswYt6mg&oe=63D4457C",
+              "syncType": "INITIAL_BOOTSTRAP"
+            }
+          }
+        },
+        "messageTimestamp": "1672267688",
+        "status": "SERVER_ACK",
+        "pushName": "SquareOne Signals",
+        "verifiedBizName": "SquareOne Signals"
+      },
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "2773C2456E6BD4CBF4A52F3355CF7E28"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileSha256": "NxNmy97OHVTpvjaj19/Vo++VySfHtgIDK0kiyd3fjo8=",
+              "fileLength": "10",
+              "mediaKey": "tmmTJKRvosVLo2rvxKFt8F6ZszeGR90iA5VFgufJwvU=",
+              "fileEncSha256": "HZWlXsbJzygjep0+i18ccAel5f3MrC2iYru9l++boP4=",
+              "directPath": "/v/t62.31111-24/19239219_526251796232220_8968028264945802884_n.enc?ccb=11-4&oh=01_AdRQFtbqWmKqzI5j_otVYG1KWy6dBXEt0PteLyRBDA4IoA&oe=63D424D5",
+              "syncType": "NON_BLOCKING_DATA"
+            }
+          }
+        },
+        "messageTimestamp": "1672267688",
+        "status": "SERVER_ACK",
+        "pushName": "SquareOne Signals",
+        "verifiedBizName": "SquareOne Signals"
+      },
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "9DACD1DD21F86941B0C2C6A8D9CD1407"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileSha256": "JnpexBymLgS+Nksy/XGCnCDt0ZyGFMsEgYfLxfA6JGc=",
+              "fileLength": "1137",
+              "mediaKey": "mShjsJHFok5J4Y4cQNzEhyg/GLhYQ2IJceuvsua27ag=",
+              "fileEncSha256": "q7alkfKm3RxPKGGDKVkWA0Z4uHSJsVbOD2+JeRu6g3Q=",
+              "directPath": "/v/t62.31111-24/35175300_547912917212834_6512150332769690719_n.enc?ccb=11-4&oh=01_AdTJzRss-FOiyCj4QAFCXFW2ntSGSxwviECyfNbp_OMNvw&oe=63D42184",
+              "syncType": "RECENT",
+              "chunkOrder": 1,
+              "progress": 100
+            }
+          }
+        },
+        "messageTimestamp": "1672267690",
+        "status": "SERVER_ACK",
+        "pushName": "SquareOne Signals",
+        "verifiedBizName": "SquareOne Signals"
+      },
+      {
+        "key": {
+          "remoteJid": "79870852993@s.whatsapp.net",
+          "fromMe": true,
+          "id": "49820D71CA640112F2439BF774337129"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileSha256": "A8gAeHtYIoprUjakiT1YllIEvuLRbuCjDkQPwVhEIQg=",
+              "fileLength": "14",
+              "mediaKey": "7hAnvNjC/k8bA1dqx7y7z+mHBEQqUzqbe1+wsXy98rU=",
+              "fileEncSha256": "aTBoy4R9sJlcZwkQSyyRekVESQDfArzv/iVU3QhPduE=",
+              "directPath": "/v/t62.31111-24/34612781_1185507248744200_5362499821282855570_n.enc?ccb=11-4&oh=01_AdRvTHK7Lcw2vXRAtR8cP7pa9p441j9aJyOw1KmhWzL9xA&oe=63D43001",
+              "syncType": "RECENT",
+              "chunkOrder": 2,
+              "progress": 100
+            }
+          }
+        },
+        "messageTimestamp": "1672267690",
+        "status": "SERVER_ACK",
+        "pushName": "SquareOne Signals",
+        "verifiedBizName": "SquareOne Signals"
+      }
+    ],
+    "status@broadcast": [
+      {
+        "key": {
+          "remoteJid": "status@broadcast",
+          "fromMe": false,
+          "id": "4026558219375391062798757750920"
+        },
+        "message": {
+          "videoMessage": {
+            "mimetype": "video/mp4",
+            "fileSha256": "wS8NmK0gjyEByh+sSauVTSjFJwBzXbtg7/SY7Dayen0=",
+            "fileLength": "1691082",
+            "mediaKey": "jKJru1TTfkPOTrrL02xq0LrFIRAHylecnGLRkAYdqug=",
+            "fileEncSha256": "n/yVCbJ48rHdsQ6RvJ1JmWK0xXMrqnkEmK7z1X0+NRc=",
+            "staticUrl": "https://static.whatsapp.net/downloadable?category=PSA&id=141190353774771406&num=5f0aefaf-8748-4848-a978-8694f653f2dc"
+          }
+        },
+        "messageTimestamp": "0",
+        "participant": "0@s.whatsapp.net",
+        "ephemeralOutOfSync": false
+      },
+      {
+        "key": {
+          "remoteJid": "status@broadcast",
+          "fromMe": false,
+          "id": "4026558219375392123759911150528"
+        },
+        "message": {
+          "videoMessage": {
+            "mimetype": "video/mp4",
+            "fileSha256": "m8f11v3x+lrpIDJlPwiIkxyt79B3v8U4luNNzZUc54I=",
+            "fileLength": "3022983",
+            "mediaKey": "uwjrYdc2+KBC6FVvQk+LrgYk8mXu6zI7GJgbMuMub0A=",
+            "fileEncSha256": "2p9fjDlYlHN4r/XyFITjuO2pG+zGG9YfoZQQNjEECR0=",
+            "staticUrl": "https://static.whatsapp.net/downloadable?category=PSA&id=255818201953397965&num=0a764469-546a-4a7b-b1b7-da888c6773cb"
+          }
+        },
+        "messageTimestamp": "0",
+        "participant": "0@s.whatsapp.net",
+        "ephemeralOutOfSync": false
+      },
+      {
+        "key": {
+          "remoteJid": "status@broadcast",
+          "fromMe": false,
+          "id": "402655821937539668142644872286"
+        },
+        "message": {
+          "videoMessage": {
+            "mimetype": "video/mp4",
+            "fileSha256": "vhDeh0VXZcsgL89cXfgWSKyOHMjwDi/klgyNHTUacGo=",
+            "fileLength": "4913131",
+            "mediaKey": "GhtH4m9a+uRtpV9pej9cYyLV2uX3FQ5cbOvrWwq1S1g=",
+            "fileEncSha256": "2xtAlfhqznJJbiNbDsehLs1osOUoKg4iAKbG8gJcNLE=",
+            "staticUrl": "https://static.whatsapp.net/downloadable?category=PSA&id=283507772626156010&num=5ba78680-b606-442b-b7e0-5524ac3082e2"
+          }
+        },
+        "messageTimestamp": "0",
+        "participant": "0@s.whatsapp.net",
+        "ephemeralOutOfSync": false
+      },
+      {
+        "key": {
+          "remoteJid": "status@broadcast",
+          "fromMe": false,
+          "id": "402655821937539347264170951870"
+        },
+        "message": {
+          "videoMessage": {
+            "mimetype": "video/mp4",
+            "fileSha256": "IK/8rrQrI6fBCUB4ECXi9m84SAAdZqknrb5GrJIcgxU=",
+            "fileLength": "1155282",
+            "mediaKey": "Kwm9N0Nh77Uorvoams8qH2X+vGgukhtzctXrGyep4QA=",
+            "fileEncSha256": "lCLQG8tb8I/8lZNnVK0A98y0prvIHXmq0zKCksUJPL0=",
+            "staticUrl": "https://static.whatsapp.net/downloadable?category=PSA&id=740587949688236557&num=003a272b-3b49-4d57-a7db-519f4f77ca31"
+          }
+        },
+        "messageTimestamp": "0",
+        "participant": "0@s.whatsapp.net",
+        "ephemeralOutOfSync": false
+      }
+    ]
+  },
+  "labelsById": {
+    "1": {
+      "predefinedId": 1,
+      "name": "New customer",
+      "color": 1,
+      "deleted": false
+    },
+    "2": {
+      "predefinedId": 2,
+      "name": "New order",
+      "color": 2,
+      "deleted": false
+    },
+    "3": {
+      "predefinedId": 3,
+      "name": "Pending payment",
+      "color": 0,
+      "deleted": false
+    },
+    "4": {
+      "predefinedId": 4,
+      "name": "Paid",
+      "color": 3,
+      "deleted": false
+    },
+    "5": {
+      "predefinedId": 5,
+      "name": "Order complete",
+      "color": 5,
+      "deleted": false
+    }
+  },
+  "labelIdsForContact": {
+    "79166774509@s.whatsapp.net": [
+      3
+    ]
+  }
+}
