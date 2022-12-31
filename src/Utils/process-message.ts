@@ -273,39 +273,41 @@ const processMessage = async (
 					chat.readOnly = false
 				}
 
-				emitParticipantsUpdate('add')
-				break
-			case WAMessageStubType.GROUP_PARTICIPANT_DEMOTE:
-				participants = message.messageStubParameters || []
-				emitParticipantsUpdate('demote')
-				break
-			case WAMessageStubType.GROUP_PARTICIPANT_PROMOTE:
-				participants = message.messageStubParameters || []
-				emitParticipantsUpdate('promote')
-				break
-			case WAMessageStubType.GROUP_CHANGE_ANNOUNCE:
-				const announceValue = message.messageStubParameters?.[0]
-				emitGroupUpdate({
-					announce:
-						announceValue === 'true' || announceValue === 'on',
-				})
-				break
-			case WAMessageStubType.GROUP_CHANGE_RESTRICT:
-				const restrictValue = message.messageStubParameters?.[0]
-				emitGroupUpdate({
-					restrict:
-						restrictValue === 'true' || restrictValue === 'on',
-				})
-				break
-			case WAMessageStubType.GROUP_CHANGE_SUBJECT:
-				const name = message.messageStubParameters?.[0]
-				chat.name = name
-				emitGroupUpdate({ subject: name })
-				break
-			case WAMessageStubType.GROUP_CHANGE_INVITE_LINK:
-				const code = message.messageStubParameters?.[0]
-				emitGroupUpdate({ inviteCode: code })
-				break
+			emitParticipantsUpdate('add')
+			break
+		case WAMessageStubType.GROUP_PARTICIPANT_DEMOTE:
+			participants = message.messageStubParameters || []
+			emitParticipantsUpdate('demote')
+			break
+		case WAMessageStubType.GROUP_PARTICIPANT_PROMOTE:
+			participants = message.messageStubParameters || []
+			emitParticipantsUpdate('promote')
+			break
+		case WAMessageStubType.GROUP_CHANGE_ANNOUNCE:
+			const announceValue = message.messageStubParameters?.[0]
+			emitGroupUpdate({ announce: announceValue === 'true' || announceValue === 'on' })
+			break
+		case WAMessageStubType.GROUP_CHANGE_RESTRICT:
+			const restrictValue = message.messageStubParameters?.[0]
+			emitGroupUpdate({ restrict: restrictValue === 'true' || restrictValue === 'on' })
+			break
+		case WAMessageStubType.GROUP_CHANGE_SUBJECT:
+			const name = message.messageStubParameters?.[0]
+			chat.name = name
+			emitGroupUpdate({ subject: name })
+			break
+		case WAMessageStubType.GROUP_CHANGE_INVITE_LINK:
+			const code = message.messageStubParameters?.[0]
+			emitGroupUpdate({ inviteCode: code })
+			break
+			case WAMessageStubType.GROUP_CHANGE_DESCRIPTION:
+			if(message.messageStubParameters?.length === 2) {
+				const [descId, desc] = message.messageStubParameters
+				emitGroupUpdate({ descId, desc })
+			}
+
+			break
+
 		}
 	}
 
