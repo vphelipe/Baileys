@@ -5,6 +5,7 @@ import { proto } from '../../WAProto'
 import { DEFAULT_CONNECTION_CONFIG } from '../Defaults'
 import type makeMDSocket from '../Socket'
 import type { BaileysEventEmitter, Chat, ConnectionState, Contact, GroupMetadata, PresenceData, WAMessage, WAMessageCursor, WAMessageKey } from '../Types'
+import { LabelAssociation } from '../Types/Label'
 import { toNumber, updateMessageWithReaction, updateMessageWithReceipt } from '../Utils'
 import { jidNormalizedUser } from '../WABinary'
 import makeOrderedDictionary from './make-ordered-dictionary'
@@ -37,6 +38,7 @@ export default (
 	const contacts: { [_: string]: Contact } = { }
 	const groupMetadata: { [_: string]: GroupMetadata } = { }
 	const presences: { [id: string]: { [participant: string]: PresenceData } } = { }
+	const labelAssociations: { [_: string]: LabelAssociation } = { }
 	const state: ConnectionState = { connection: 'close' }
 
 	const assertMessageList = (jid: string) => {
@@ -134,6 +136,14 @@ export default (
 		ev.on('presence.update', ({ id, presences: update }) => {
 			presences[id] = presences[id] || {}
 			Object.assign(presences[id], update)
+		})
+		ev.on('labelAssociation.set', ({ chat, label, type = 'jid' }) => {
+			const id = chat + label
+			labelAssociations[id] = { id, associatioinId: chat, labelId: label, type }
+		})
+		ev.on('labelAssociation.delete', ({ chat, label }) => {
+			const id = chat + label
+			delete labelAssociations[id]
 		})
 		ev.on('chats.delete', deletions => {
 			for(const item of deletions) {
@@ -266,6 +276,7 @@ export default (
 		contacts,
 		messages,
 		groupMetadata,
+		labelAssociations,
 		state,
 		presences,
 		bind,
