@@ -12,7 +12,9 @@ import {
 	WAMessage,
 	WAMessageStatus,
 } from '../Types'
+import { Label, LabelAssocAction } from '../Types/Labels'
 import { trimUndefineds } from './generics'
+import { ManyToOne, OneToOne } from './label-utils'
 import { updateMessageWithReaction, updateMessageWithReceipt } from './messages'
 import { isRealMessage, shouldIncrementChatUnread } from './process-message'
 
@@ -29,6 +31,8 @@ const BUFFERABLE_EVENT = [
 	'messages.reaction',
 	'message-receipt.update',
 	'groups.update',
+	'label.edit',
+	'label.association',
 ] as const
 
 type BufferableEvent = typeof BUFFERABLE_EVENT[number]
@@ -44,7 +48,7 @@ type BaileysEventData = Partial<BaileysEventMap>
 
 const BUFFERABLE_EVENT_SET = new Set<BaileysEvent>(BUFFERABLE_EVENT)
 
-type BaileysBufferableEventEmitter = BaileysEventEmitter & {
+export type BaileysBufferableEventEmitter = BaileysEventEmitter & {
 	/** Use to process events in a batch */
 	process(
 		handler: (events: BaileysEventData) => void | Promise<void>
@@ -182,6 +186,10 @@ const makeBufferData = (): BufferedEventData => {
 			chats: {},
 			messages: {},
 			contacts: {},
+			labelsById: new OneToOne('labelsById/BufferedEventData'),
+			labelIdsForContact: new ManyToOne(
+				'labelIdsForContact/BufferedEventData'
+			),
 			isLatest: false,
 			empty: true,
 		},
@@ -246,6 +254,14 @@ function append<E extends BufferableEvent>(
 					historyCache.add(key)
 				}
 			}
+
+			data.historySets.labelsById = (
+				eventData.labelsById as OneToOne<number, Label>
+			).clone()
+
+			data.historySets.labelIdsForContact = (
+				eventData.labelIdsForContact as ManyToOne<string, number>
+			).clone()
 
 			data.historySets.empty = false
 			data.historySets.isLatest =
@@ -537,6 +553,33 @@ function append<E extends BufferableEvent>(
 			}
 
 			break
+
+		case 'label.edit':
+			const label: Label = eventData
+			// if (newLabel.deleted) {
+			// 	just delete from labelsById?...
+			// }
+			data.historySets.labelsById.putIfAbsent(
+				(label) => label.predefinedId || -1,
+				label
+			)
+			break
+
+		case 'label.association':
+			const labelAssoc: LabelAssocAction = eventData
+			if (labelAssoc.assign) {
+				data.historySets.labelIdsForContact.appendValueForKey(
+					labelAssoc.contactName,
+					labelAssoc.labelPredefinedId
+				)
+			} else {
+				data.historySets.labelIdsForContact.removeValueForKey(
+					labelAssoc.contactName,
+					labelAssoc.labelPredefinedId
+				)
+			}
+			break
+
 		default:
 			throw new Error(`"${event}" cannot be buffered`)
 	}
@@ -591,6 +634,8 @@ function consolidateEvents(data: BufferedEventData) {
 			chats: Object.values(data.historySets.chats),
 			messages: Object.values(data.historySets.messages),
 			contacts: Object.values(data.historySets.contacts),
+			labelsById: data.historySets.labelsById.clone(),
+			labelIdsForContact: data.historySets.labelIdsForContact.clone(),
 			isLatest: data.historySets.isLatest,
 		}
 	}

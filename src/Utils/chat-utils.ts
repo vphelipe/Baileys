@@ -15,6 +15,7 @@ import {
 	WAPatchCreate,
 	WAPatchName,
 } from '../Types'
+import { Label, LabelAssocAction } from '../Types/Labels'
 import {
 	BinaryNode,
 	getBinaryNodeChild,
@@ -800,7 +801,6 @@ export const processSyncAction = (
 	me: Contact,
 	initialSyncOpts?: InitialAppStateSyncOptions,
 	logger?: Logger
-	//   labelsTracker?:
 ) => {
 	const isInitialSync = !!initialSyncOpts
 	const accountSettings = initialSyncOpts?.accountSettings
@@ -941,6 +941,23 @@ export const processSyncAction = (
 		if (!isInitialSync) {
 			ev.emit('chats.delete', [id])
 		}
+	} else if (action?.labelEditAction || type === 'label_edit') {
+		const label: Label = {
+			predefinedId: action?.labelEditAction?.predefinedId,
+			name: action?.labelEditAction?.name,
+			color: action?.labelEditAction?.color,
+			deleted: action?.labelEditAction?.deleted,
+		}
+		ev.emit('label.edit', label)
+	} else if (action?.labelAssociationAction || type === 'deleteChat') {
+		const assigned =
+			action?.labelAssociationAction?.labeled === true || false
+		const labelAssoc: LabelAssocAction = {
+			contactName: msgId,
+			labelPredefinedId: Number.parseInt(id) || -1,
+			assign: assigned,
+		}
+		ev.emit('label.association', labelAssoc)
 	} else {
 		logger?.debug({ syncAction, id }, 'unprocessable update')
 	}

@@ -20,14 +20,13 @@ import {
 	JsonLabelsForContact,
 	Label,
 	LabelAssocAction,
-	labelsById,
-	labelsForContact,
 } from '../Types/Labels'
 import {
 	toNumber,
 	updateMessageWithReaction,
 	updateMessageWithReceipt,
 } from '../Utils'
+import { OneToOne, ManyToOne } from '../Utils/label-utils'
 import { jidNormalizedUser } from '../WABinary'
 import makeOrderedDictionary from './make-ordered-dictionary'
 
@@ -71,6 +70,16 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 		{}
 	const state: ConnectionState = { connection: 'close' }
 
+	// will be filled by (.initialSync=true).syncAction.value=labelEditAction
+	let labelsById: OneToOne<number, Label> = new OneToOne(
+		'labelsById/InMemoryStore'
+	)
+
+	// will be filled by (.initialSync=true).syncAction.value=labelEditAction.predefinedId
+	let labelIdsForContact = new ManyToOne<string, number>(
+		'labelIdsForContact/InMemoryStore'
+	) // Map of labelId: contactIds[]
+
 	const assertMessageList = (jid: string) => {
 		if (!messages[jid]) {
 			messages[jid] = makeMessagesDictionary()
@@ -109,6 +118,8 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 				chats: newChats,
 				contacts: newContacts,
 				messages: newMessages,
+				labelsById: newLabelsById,
+				labelIdsForContact: newLabelIdsForContact,
 				isLatest,
 			}) => {
 				if (isLatest) {
@@ -142,6 +153,13 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 					{ messages: newMessages.length },
 					'synced messages'
 				)
+
+				if (newLabelsById) {
+					labelsById = newLabelsById.clone()
+				}
+				if (newLabelIdsForContact) {
+					labelIdsForContact = newLabelIdsForContact.clone()
+				}
 			}
 		)
 
@@ -303,20 +321,26 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 			}
 		})
 		ev.on('label.edit', (newLabel: Label) => {
-			labelsById.set(newLabel.predefinedId || 0, newLabel)
+			// if (newLabel.deleted) {
+			// 	just delete from labelsById?...
+			// }
+			labelsById.putIfAbsent(
+				(newLabel) => newLabel.predefinedId || -1,
+				newLabel
+			)
 		})
 		ev.on('label.association', (newAssoc: LabelAssocAction) => {
-			const label: Label = labelsById.getIfAbsent(
-				newAssoc.labelPredefinedId,
-				{
-					predefinedId: -1,
-					name: 'UNKNOWN_LABEL',
-				}
-			)
-			labelsForContact.appendValueForKey(
-				label.predefinedId || -1,
-				newAssoc.contactName
-			)
+			if (newAssoc.assign) {
+				labelIdsForContact.appendValueForKey(
+					newAssoc.contactName,
+					newAssoc.labelPredefinedId
+				)
+			} else {
+				labelIdsForContact.removeValueForKey(
+					newAssoc.contactName,
+					newAssoc.labelPredefinedId
+				)
+			}
 		})
 	}
 
@@ -324,16 +348,16 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 		chats,
 		contacts,
 		messages,
-		labels: labelsById,
-		labelsForContact,
+		labelsById: labelsById.dumptoJson(),
+		labelIdsForContact: labelIdsForContact.dumptoJson(),
 	})
 
 	type JsonFile = {
 		chats: Chat[]
 		contacts: { [id: string]: Contact }
 		messages: { [id: string]: WAMessage[] }
-		labels: JsonLabels
-		labelsForContact: JsonLabelsForContact
+		labelsById?: JsonLabels
+		labelsForContact?: JsonLabelsForContact
 	}
 
 	const fromJSON = (json: JsonFile) => {
@@ -346,8 +370,8 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 			}
 		}
 		labelsById.fillFromJsonMap(
-			json.labels,
-			(key: any) => Number.parseInt(`$key`),
+			json.labelsById,
+			(key: any) => Number.parseInt(`${key}`),
 			(value: any) =>
 				<Label>{
 					name: value.name as string,
@@ -355,7 +379,7 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 					predefinedId: value.color as number,
 				}
 		)
-		labelsForContact.fillFromJsonMap(json.labelsForContact)
+		labelIdsForContact.fillFromJsonMap(json.labelsForContact)
 	}
 
 	return {
@@ -365,6 +389,8 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 		groupMetadata,
 		state,
 		presences,
+		labelsById,
+		labelIdsForContact,
 		bind,
 		/** loads messages from the store, if not found -- uses the legacy connection */
 		loadMessages: async (
@@ -450,7 +476,7 @@ export default ({ logger: _logger, chatKey }: BaileysInMemoryStoreConfig) => {
 		writeToFile: (path: string) => {
 			// require fs here so that in case "fs" is not available -- the app does not crash
 			const { writeFileSync } = require('fs')
-			writeFileSync(path, JSON.stringify(toJSON()))
+			writeFileSync(path, JSON.stringify(toJSON(), null, 2))
 		},
 		readFromFile: (path: string) => {
 			// require fs here so that in case "fs" is not available -- the app does not crash

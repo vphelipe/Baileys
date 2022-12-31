@@ -6,6 +6,7 @@ import { Chat, ChatUpdate, PresenceData } from './Chat'
 import { Contact } from './Contact'
 import { GroupMetadata, ParticipantAction } from './GroupMetadata'
 import { Label, LabelAssocAction } from './Labels'
+import { ManyToOne, OneToOne } from '../Utils/label-utils'
 import {
 	MessageUpsertType,
 	MessageUserReceiptUpdate,
@@ -14,6 +15,11 @@ import {
 	WAMessageUpdate,
 } from './Message'
 import { ConnectionState } from './State'
+import { MessagingHistory } from '../Utils/history'
+
+export type MessagingHistorySet = MessagingHistory & {
+	isLatest: boolean
+}
 
 export type BaileysEventMap = {
 	/** connection state has been updated -- WS closed, opened, connecting etc. */
@@ -21,12 +27,7 @@ export type BaileysEventMap = {
 	/** credentials updated -- some metadata, keys or something */
 	'creds.update': Partial<AuthenticationCreds>
 	/** set chats (history sync), everything is reverse chronologically sorted */
-	'messaging-history.set': {
-		chats: Chat[]
-		contacts: Contact[]
-		messages: WAMessage[]
-		isLatest: boolean
-	}
+	'messaging-history.set': MessagingHistorySet
 	/** upsert chats */
 	'chats.upsert': Chat[]
 	/** update the given chats */
@@ -83,6 +84,8 @@ export type BufferedEventData = {
 		chats: { [jid: string]: Chat }
 		contacts: { [jid: string]: Contact }
 		messages: { [uqId: string]: WAMessage }
+		labelsById: OneToOne<number, Label>
+		labelIdsForContact: ManyToOne<string, number>
 		empty: boolean
 		isLatest: boolean
 	}

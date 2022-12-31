@@ -18,7 +18,7 @@
 	],
 	"scripts": {
 		"test": "jest",
-		"labels": "jest --config=./.jest.config.json -t protoactions",
+		"test-labels": "jest --clearCache && jest -i test.extend-store-with-labels.ts --watch",
 		"prepare": "tsc",
 		"build:all": "tsc && typedoc",
 		"build:docs": "typedoc",

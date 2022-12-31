@@ -3,8 +3,10 @@ import { promisify } from 'util'
 import { inflate } from 'zlib'
 import { proto } from '../../WAProto'
 import { Chat, Contact, WAMessageStubType } from '../Types'
+import { Label } from '../Types/Labels'
 import { isJidUser } from '../WABinary'
 import { toNumber } from './generics'
+import { OneToOne, ManyToOne } from './label-utils'
 import { normalizeMessageContent } from './messages'
 import { downloadContentFromMessage } from './messages-media'
 
@@ -31,7 +33,19 @@ export const downloadHistory = async (
 	return syncData
 }
 
-export const processHistoryMessage = (item: proto.IHistorySync) => {
+export type MessagingHistory = {
+	chats: Chat[]
+	contacts: Contact[]
+	messages: proto.IWebMessageInfo[]
+
+	// label extensions are nullable otherwise ERROR+aLotOfRefactoring in process-message.ts
+	labelsById?: OneToOne<number, Label>
+	labelIdsForContact?: ManyToOne<string, number>
+}
+
+export const processHistoryMessage = (
+	item: proto.IHistorySync
+): MessagingHistory => {
 	const messages: proto.IWebMessageInfo[] = []
 	const contacts: Contact[] = []
 	const chats: Chat[] = []
@@ -106,7 +120,7 @@ export const processHistoryMessage = (item: proto.IHistorySync) => {
 export const downloadAndProcessHistorySyncNotification = async (
 	msg: proto.Message.IHistorySyncNotification,
 	options: AxiosRequestConfig<any>
-) => {
+): Promise<MessagingHistory> => {
 	const historyMsg = await downloadHistory(msg, options)
 	return processHistoryMessage(historyMsg)
 }

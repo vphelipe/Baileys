@@ -1,12 +1,16 @@
 export type ObjectKey = string | number // || Symbol
 
-export class MapJ<K, V> extends Map<K, V> {
+export class OneToOne<K, V> extends Map<K, V> {
 	get msig(): string {
-		return `MapJ[${this.whatsInside}]`
+		return `OntToOne[${this.whatsInside}]`
 	}
 
-	constructor(readonly whatsInside: string) {
-		super()
+	constructor(readonly whatsInside: string, copyFrom?: Map<K, V>) {
+		super(copyFrom)
+	}
+
+	clone(): OneToOne<K, V> {
+		return new OneToOne(`${this.whatsInside}.cloned`, this)
 	}
 
 	getIfAbsent(key: K, ifAbsent: V): V {
@@ -15,17 +19,15 @@ export class MapJ<K, V> extends Map<K, V> {
 	}
 
 	putIfAbsent(
+		getKey: (value: V) => K,
 		newValue: V,
-		getKey?: (value: V) => K,
-		ifAbsent?: V,
-		merge: boolean = true
+		merge: boolean = false
 	): V | undefined {
-		const key: K | undefined =
-			getKey?.(newValue) || (ifAbsent && getKey?.(ifAbsent))
+		const key: K | undefined = getKey(newValue)
 		if (!key) {
 			console.error(
-				`${this.msig}.upsert() couldn't .getKey() for newValue,ifAbsent`,
-				[newValue, ifAbsent]
+				`${this.msig}.putIfAbsent() couldn't .getKey() for newValue`,
+				[newValue]
 			)
 			return undefined
 		}
@@ -41,10 +43,13 @@ export class MapJ<K, V> extends Map<K, V> {
 	}
 
 	fillFromJsonMap(
-		jsonMap: { [_: ObjectKey]: any },
+		jsonMap: { [_: ObjectKey]: any } | undefined,
 		keyFactory?: (_: any) => K,
 		valueFactory?: (_: any) => V
 	) {
+		if (!jsonMap) {
+			return
+		}
 		for (const jsonKey in jsonMap) {
 			let keyConverted: K
 			try {
@@ -78,7 +83,7 @@ export class MapJ<K, V> extends Map<K, V> {
 	dumptoJson(
 		keyConverter?: (_: K) => ObjectKey,
 		valueConverter?: (_: V) => ObjectKey
-	): string {
+	): { [_: ObjectKey]: ObjectKey } {
 		const ret: { [_: ObjectKey]: ObjectKey } = {}
 		for (const tuple of this.entries()) {
 			const [mapKey, mapValue] = tuple
@@ -88,13 +93,17 @@ export class MapJ<K, V> extends Map<K, V> {
 				valueConverter?.(mapValue) || (mapValue as unknown as ObjectKey)
 			ret[keyConverted] = valueConverted
 		}
-		return JSON.stringify(ret)
+		return ret
 	}
 }
 
 export class ManyToOne<K, V> extends Map<K, V[]> {
-	constructor(readonly whatsInside: string) {
-		super()
+	constructor(readonly whatsInside: string, copyFrom?: Map<K, V[]>) {
+		super(copyFrom)
+	}
+
+	clone(): ManyToOne<K, V> {
+		return new ManyToOne(`${this.whatsInside}.cloned`, this)
 	}
 
 	appendValueForKey(key: K, value: V, avoidDuplicates: boolean = true): void {
@@ -106,6 +115,27 @@ export class ManyToOne<K, V> extends Map<K, V[]> {
 			return
 		}
 		values.push(value)
+	}
+
+	removeValueForKey(
+		key: K,
+		value: V,
+		removeKeyIfEmpty: boolean = false
+	): void {
+		if (!super.has(key)) {
+			return
+		}
+		const values = super.get(key)!
+		const indexFound = values.indexOf(value)
+		if (indexFound === -1) {
+			return
+		}
+		const shallowCopy = values.splice(indexFound, 1)
+		if (shallowCopy.length === 0 && removeKeyIfEmpty) {
+			super.delete(key)
+			return
+		}
+		super.set(key, shallowCopy)
 	}
 
 	findUniqueKeysWithValue(value: V): K[] {
@@ -156,10 +186,13 @@ export class ManyToOne<K, V> extends Map<K, V[]> {
 	}
 
 	fillFromJsonMap(
-		jsonMap: { [_: ObjectKey]: ObjectKey[] },
+		jsonMap: { [_: ObjectKey]: ObjectKey[] } | undefined,
 		keyFactory?: (_: any) => K,
 		valueFactory?: (_: any) => V
 	) {
+		if (!jsonMap) {
+			return
+		}
 		const msig = `ManyToOne[${this.whatsInside}]`
 		for (const jsonKey in jsonMap) {
 			let keyConverted: K
@@ -196,7 +229,7 @@ export class ManyToOne<K, V> extends Map<K, V[]> {
 	dumptoJson(
 		keyConverter?: (_: K) => ObjectKey,
 		valueConverter?: (_: V) => ObjectKey
-	): string {
+	): { [_: ObjectKey]: ObjectKey[] } {
 		const ret: { [_: ObjectKey]: ObjectKey[] } = {}
 		for (const tuple of this.entries()) {
 			const [mapKey, mapValues] = tuple
@@ -208,6 +241,6 @@ export class ManyToOne<K, V> extends Map<K, V[]> {
 			)
 			ret[keyConverted] = valuesConverted
 		}
-		return JSON.stringify(ret)
+		return ret
 	}
 }
